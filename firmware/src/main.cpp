@@ -93,7 +93,7 @@ void initServo() {
 
     doorServo.setPeriodHertz(50);    // standard 50 hz servo
     doorServo.attach(SERVO_PIN , 1000 , 2000);
-   doorServo.write(0); // Set to middle position
+   doorServo.write(20); // Set to middle position
 }
 
 void notifyCallback(
@@ -265,13 +265,13 @@ void loop() {
     //if the notify was received, open the door for 5 seconds.
     if(openDoor) {
         Serial.println("Remote open door command received!");
-        for(int i = 0; i <= 90; i++) {
+        for(int i = 20; i <= 90; i++) {
             doorServo.write(i); // Open door
             delay(7);
         }
         
         delay(2000); // Keep door open for 5 seconds
-        for(int i = 90; i >= 0; i--) {
+        for(int i = 90; i >= 20; i--) {
             doorServo.write(i); // Open door
             delay(7);
         }

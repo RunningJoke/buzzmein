@@ -16,6 +16,17 @@
 #define CHAR_LED_COLOR_UUID    "12345678-1234-1234-1234-1234567890ad"
 #define CHAR_ACTION_MODE_UUID  "12345678-1234-1234-1234-1234567890ae"
 #define CHAR_NOTIFY_UUID       "12345678-1234-1234-1234-1234567890af"
+#define CHAR_RESET_UUID       "12345678-1234-1234-1234-1234567890b0"
+
+
+enum class PeripheralActionMode : uint8_t {
+    HIT = '1',
+    AVOID = '2',
+    COUNTER = '3',
+    COUNTDOWN = '4',
+};
+
+
 
 extern void subscribeNotify(BLERemoteCharacteristic* pChar , class Peripheral* peripheral);
 extern bool openDoor;
@@ -28,7 +39,8 @@ class Peripheral {
         void setLedColor(const std::string& color);
 
         // Set the action mode characteristic value
-        void setActionMode(const std::string& mode);
+        void setActionMode(PeripheralActionMode actionMode);
+        PeripheralActionMode getActionMode();
 
         void activate();
 
@@ -40,10 +52,13 @@ class Peripheral {
         );
 
         void resetPeripheral();
-
+        
         uint64_t peripheralTimer; // Timer for the peripheral
     
     protected:
+
+        PeripheralActionMode actionMode;
+
         BLEAdvertisedDevice advertisedDevice; // The advertised device information
         uint8_t peripheralId; // Unique ID for the peripheral
         BLERemoteService* remoteService; // Remote service associated with the peripheral
@@ -53,6 +68,7 @@ class Peripheral {
         BLERemoteCharacteristic* ledColorCharacteristic; // Characteristic for LED color 
         BLERemoteCharacteristic* actionModeCharacteristic; // Characteristic for action mode
         BLERemoteCharacteristic* notifyCharacteristic; // Characteristic for notifications
+        BLERemoteCharacteristic* resetCharacteristic; 
 
 };
 
