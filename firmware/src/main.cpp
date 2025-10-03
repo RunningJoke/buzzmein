@@ -186,20 +186,20 @@ bool checkAmountOfRed() {
                     if(r > 200) {
                         //we are in the target area and red is above threshold
                         detectionCount++;
-                    //    Serial.print("X");
+                        Serial.print("X");
                     } else {
-                    //    Serial.print(".");
+                        Serial.print(".");
                     }
                 } else {
                     if(r > 200) {
-                    //Serial.print("X");
+                    Serial.print("X");
                     } else {
-                    //    Serial.print(" ");
+                    Serial.print(" ");
                     }
                 } 
 
             }
-            //Serial.println();
+            Serial.println();
 
             
         }
